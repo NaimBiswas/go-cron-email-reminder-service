@@ -20,7 +20,7 @@ var (
 	smtpPort      string = "587"
 	smtpServer           = "smtp.gmail.com"
 	smtpUser             = "naimbiswas0"
-	smtpPassword         = ""
+	smtpPassword         = "jekasojgnnufgpcl"
 )
 
 func authenticateSmtp() {
@@ -90,10 +90,11 @@ func prepareEmailBody() {
 		PreviousMonth: previousMonth,
 		HRManagerName: hrManagerName,
 	}
-
-	err = tmpl.Execute(&body, data)
+	var emailBody bytes.Buffer
+	err = tmpl.Execute(&emailBody, data)
 
 	if err != nil {
 		fmt.Println(err)
 	}
+	body = emailBody
 }
