@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .content {
+            margin-bottom: 20px;
+        }
+        .footer {
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            Friendly Reminder: Salary Reminder for {{.PreviousMonth}}
+        </div>
+        <div class="content">
+            <p>Dear {{.HRManagerName}}</p>
+            <p>I hope this message finds you well.</p>
+            <p>I am writing to request your assistance in reminding <b>Max Doleh</b> regarding my salary for {{.PreviousMonth}}.
+                It would be greatly appreciated if you could follow up with the <b>Max</b> to ensure the payment is processed.</p>
+            <p>If there are any additional details from my side to facilitate this process, please let me know.</p>
+            <p>Thank you for your help with this matter. I look forward to your prompt action.</p>
+        </div>
+        <div class="footer">
+            Best regards,<br>
+            Naim Biswas<br>
+            Software Developer<br>
+            Phone: +8801774697860, +8801854134883<br>
+            Email: naim.biswas@pixelque.com, naim.b@productivet.com, mdnaim.biswas@pixelque.com
+        </div>
+    </div>
+</body>
+</html>
