@@ -3,55 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salary Reminder</title>
-    <style>
+    <title>Reminder Email for Pending Salary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    
+   <style>
         body {
-            font-family: Arial, sans-serif;
-            color: #333;
-            margin: 0;
+            font-family: "Merriweather", serif;
+            font-weight: 300;
+            font-style: normal;
+            line-height: 1.6;
+            letter-spacing: .6;
+            margin: 25px;
             padding: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #131212;
+            font-size: 16px;
+            max-width: "100%!important";
         }
         .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ddd;
+            max-width: 700px;
+            margin: 20px auto;
+            background-color: #010101;
+            padding: 30px;
             border-radius: 5px;
-            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .header {
-            font-size: 24px;
-            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid #d10c54;
+            padding-bottom: 10px;
             margin-bottom: 20px;
+            color: #ddd;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #ddd;
         }
         .content {
             margin-bottom: 20px;
         }
+        .content p {
+            margin: 10px 0;
+            color: #fff;
+            font-size: 17px;
+        }
+        .details {
+            margin: 20px 0;
+            color: #d10c54;
+        }
+        .details ul {
+            list-style-type: none;
+            padding: 0;
+            color: bisque;
+        }
+        .details li {
+            margin: 5px 0;
+        }
         .footer {
-            font-size: 14px;
-            color: #777;
+            margin-top: 20px;
+            border-top: 1px solid #d10c54;
+            padding-top: 10px;
+            color: #ddd;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            Friendly Reminder: Salary Reminder for {{.PreviousMonth}}
+            <h1>Email for Salary Reminder</h1>
         </div>
         <div class="content">
-            <p>Dear {{.HRManagerName}}</p>
-            <p>I hope this message finds you well.</p>
-            <p>I am writing to request your assistance in reminding <b></b> regarding my salary for {{.PreviousMonth}}.
-                It would be greatly appreciated if you could follow up with the <b></b> to ensure the payment is processed.</p>
-            <p>If there are any additional details from my side to facilitate this process, please let me know.</p>
-            <p>Thank you for your help with this matter. I look forward to your prompt action.</p>
+            <p>Gentle Reminder: Pending Salary Payment for <b>{{.PreviousMonth}}</b></p>
+            <p>Dear <b>{{.HRManagerName}}</b> ,</p>
+            <p>I hope you are doing well. I am writing to gently remind you of my pending salary for the month of <b>{{.PreviousMonth}}</b>, which, as of today, has not been credited to my account. I understand the complexities and the busy schedule of our CEO/HR Department, but I would appreciate any update regarding the status of this payment.</p>
+            <div class="details">
+                <h3>Details for Your Reference:</h3>
+                <ul>
+                    <li><strong>Employee Name:</strong> {{.EmployeeName}}</li>
+                    <li><strong>Employee ID:</strong> {{.EmployeeId}}</li>
+                    <li><strong>Period:</strong> {{.PreviousMonth}}</li>
+                </ul>
+            </div>
+            <p>The timely resolution of this matter is important to me, and I am more than willing to provide any necessary information that may be required to expedite the process.</p>
+            <p>I trust this is an oversight and can be quickly rectified. Please let me know if there is a new timeline I should be aware of, or if there are any discrepancies on my end that need to be addressed.</p>
+            <p>Thank you very much for your attention to this matter. I look forward to your prompt response.</p>
         </div>
         <div class="footer">
-            Best regards,<br>
+            <p>Warm regards,</p>
+
             Naim Biswas<br>
             Software Developer<br>
-            Phone: <br>
-            Email: 
+            Phone: <span style="color: #f4f4f4;">{{.EmployeePhone}} <br>
+            Email: <span style="color: #f4f4f4;">{{.EmployeeEmail}}</span>
         </div>
     </div>
 </body>

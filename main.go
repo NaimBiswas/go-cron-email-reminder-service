@@ -3,12 +3,16 @@ package main
 import (
 	schedule "NaimBiswas/email-reminder/schedules"
 	"fmt"
+	"log"
 
+	"github.com/joho/godotenv"
 	"github.com/robfig/cron/v3"
 )
 
 func main() {
-	fmt.Sprintf("%s", "❤️‍🔥❤️‍🔥 Welcome for Schedule Cron Services❤️‍🔥❤️‍🔥")
+	loadEnvVariables()
+	
+	fmt.Println("Welcome for Schedule Cron Services")
 
 	cron := cron.New()
 
@@ -28,4 +32,11 @@ func main() {
 
 	// Keep the program running
 	select {}
+}
+
+func loadEnvVariables()  {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 }

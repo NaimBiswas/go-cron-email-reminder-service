@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/smtp"
+	"os"
 	"strconv"
 	"text/template"
 	"time"
@@ -17,17 +18,20 @@ var (
 	smtpAuth      smtp.Auth
 	toEmail       []string
 	hrManagerName string
-	smtpPort      string = "587"
-	smtpServer           = "smtp.gmail.com"
-	smtpUser             = "naimbiswas0"
-	smtpPassword         = "jekasojgnnufgpcl"
+	smtpPort      string
+	smtpServer    string
+	smtpUser      string
+	smtpPassword  string
 )
+
+
 
 func authenticateSmtp() {
 	smtpAuth = smtp.PlainAuth("", smtpUser, smtpPassword, smtpServer)
 }
 
 func New(to []string, hrNames string) *SendEmailStruct {
+	setSMTPDetails()
 	toEmail = to
 	hrManagerName = hrNames
 	authenticateSmtp()
@@ -35,6 +39,13 @@ func New(to []string, hrNames string) *SendEmailStruct {
 
 	return &SendEmailStruct{}
 
+}
+
+func setSMTPDetails()  {
+	smtpPort = os.Getenv("SMTP_PORT")
+	smtpServer = os.Getenv("SMTP_SERVER")
+	smtpUser  = os.Getenv("SMTP_EMAIL")
+	smtpPassword  = os.Getenv("SMTP_PASSWORD")
 }
 
 func (s *SendEmailStruct) SendEmailToClient() {
@@ -46,8 +57,8 @@ func (s *SendEmailStruct) SendEmailToClient() {
 
 	timestamp := now.Unix()
 
-	from := "Naim Biswas"
-	subject := "Friendly Reminder: Pending Salary for " + previousMonth + " (" + strconv.FormatInt(timestamp, 10) + ")"
+	from := os.Getenv("SMTP_USER")
+	subject := "Gentle Reminder: Salary Reminder for " + previousMonth + " (" + strconv.FormatInt(timestamp, 10) + ")"
 	msg := []byte("From: " + from + "\r\n" +
 		"To: " + fmt.Sprintf("%s", toEmail) + "\r\n" +
 		"Subject: " + subject + "\r\n" +
@@ -58,9 +69,9 @@ func (s *SendEmailStruct) SendEmailToClient() {
 	err := smtp.SendMail(smtpServer+":"+smtpPort, smtpAuth, from, toEmail, msg)
 	if err != nil {
 		fmt.Println(err)
+	} else {
+		fmt.Println("Email sent successfully")
 	}
-
-	fmt.Println("Email sent successfully")
 }
 
 func prepareEmailBody() {
@@ -86,9 +97,18 @@ func prepareEmailBody() {
 	data := struct {
 		PreviousMonth string
 		HRManagerName string
+		EmployeeName string
+		EmployeeId string
+		EmployeePhone string
+		EmployeeEmail string
 	}{
 		PreviousMonth: previousMonth,
 		HRManagerName: hrManagerName,
+		EmployeeName: os.Getenv("EMPLOYEE_NAME"),
+		EmployeeId: os.Getenv("EMPLOYEE_ID"),
+		EmployeePhone: os.Getenv("PHONE"),
+		EmployeeEmail: os.Getenv("EMAIL"),
+
 	}
 	var emailBody bytes.Buffer
 	err = tmpl.Execute(&emailBody, data)
