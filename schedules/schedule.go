@@ -9,18 +9,18 @@ import (
 	"github.com/robfig/cron/v3"
 )
 
-func Minute(c *cron.Cron) {
-	minute.SetUpMinuteCron(c)
+func Minute(c *cron.Cron, expression string) {
+	minute.SetUpMinuteCron(c, expression)
 }
 
-func Hourly(c *cron.Cron) {
-	hourly.SetUpHourlyCron(c)
+func Hourly(c *cron.Cron, expression string) {
+	hourly.SetUpHourlyCron(c, expression)
 }
 
-func Daily(c *cron.Cron) {
-	daily.SetUpDailyCron(c)
+func Daily(c *cron.Cron, expression string) {
+	daily.SetUpDailyCron(c, expression)
 }
 
-func Monthly(c *cron.Cron) {
-	monthly.SetUpMonthlyJob(c)
+func Monthly(c *cron.Cron,  expression string) {
+	monthly.SetUpMonthlyJob(c, expression)
 }

@@ -7,8 +7,8 @@ import (
 	"github.com/robfig/cron/v3"
 )
 
-func SetUpHourlyCron(c *cron.Cron) {
-	_, err := c.AddFunc("0 * * * *", func() {
+func SetUpHourlyCron(c *cron.Cron, expression string) {
+	_, err := c.AddFunc(expression, func() {
 		fmt.Println("Hourly Job is running")
 	})
 	if err != nil {
